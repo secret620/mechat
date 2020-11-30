@@ -41,6 +41,7 @@ class _MessagePageState extends State<MessagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(220, 220, 220, 0.3),
       body: ListView.builder(
         itemCount: messageDatas.length,
         itemBuilder: (BuildContext context, int index) {

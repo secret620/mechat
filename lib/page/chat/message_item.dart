@@ -38,13 +38,13 @@ class _MessageItemState extends State<MessageItem> {
                   children: <Widget>[
                     Text(
                       widget.message.title,
-                      style: TextStyle(fontSize: 16.0, color: Colors.black),
+                      style: TextStyle(fontSize: 18.0, color: Colors.black),
                       maxLines: 1,
                     ),
                     Padding(padding: EdgeInsets.only(top: 8.0)),
                     Text(
                       widget.message.subTitle,
-                      style: TextStyle(fontSize: 14.0,color: Colors.black38),
+                      style: TextStyle(fontSize: 15.0,color: Colors.black38),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     )
