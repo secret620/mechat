@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'App.dart';
 import 'Home.dart';
@@ -10,9 +11,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,// 是否显示右上角的debug
-      title: '聊天室',
       theme: appTheme,
       home: App(),
       // 添加路由信息

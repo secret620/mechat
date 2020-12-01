@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mechat/page/chat/MessagePackageType.dart';
 import 'package:mechat/page/chat/message_item.dart';
 
 import 'chat/MessageData.dart';
 import 'chat/MessageType.dart';
+import 'package:mechat/data/MessageDatas.dart';
 
 class MessagePage extends StatefulWidget {
   MessagePage({Key key}) : super(key: key);
@@ -13,34 +15,20 @@ class MessagePage extends StatefulWidget {
 
 class _MessagePageState extends State<MessagePage> {
 
-  List<MessageData> messageDatas = [
-    new MessageData (
-        'https://www.baidu.com/img/flexible/logo/pc/result.png',
-        '一休哥',
-        '突然想到的',
-        new DateTime.now(),
-        MessageType.CHAT
-    ),
-    new MessageData (
-        'https://www.baidu.com/img/flexible/logo/pc/result.png',
-        '一休哥',
-        '突然想到的突然想到的突然想到的突然想到的突然想到的突然想到的突然想到的突然想到的突然想到的突然想到的突然想到的突然想到的',
-        new DateTime.now(),
-        MessageType.CHAT
-    ),
-    new MessageData (
-        'https://www.baidu.com/img/flexible/logo/pc/result.png',
-        '一休哥',
-        '突然想到的',
-        new DateTime.now(),
-        MessageType.CHAT
-    ),
-  ];
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('旅聊'),
+        actions: <Widget>[
+          GestureDetector(
+            onTap: (){
+              print('onTap');
+            },
+            child: Icon(Icons.search),
+          )
+        ],
+      ),
       backgroundColor: Color.fromRGBO(220, 220, 220, 0.3),
       body: ListView.builder(
         itemCount: messageDatas.length,

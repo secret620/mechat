@@ -1,4 +1,5 @@
 
+import 'package:mechat/page/chat/MessagePackageType.dart';
 import 'package:mechat/page/chat/MessageType.dart';
 
 class MessageData {
@@ -17,6 +18,8 @@ class MessageData {
   //消息类型
   MessageType type;
 
+  MessagePackageType packageType;
+
   MessageData(
-      this.avatar, this.title, this.subTitle, this.time, this.type);
+      this.avatar, this.title, this.subTitle, this.time, this.type, this.packageType);
 }

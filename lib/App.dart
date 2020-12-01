@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'page/Contacts.dart';
 import 'page/MessagePage.dart';
 import 'page/Personal.dart';
+import 'page/test_page.dart';
 
 class App extends StatefulWidget {
   App({Key key}) : super(key: key);
@@ -18,6 +19,7 @@ class _AppState extends State<App> {
     0 : new MessagePage(),//聊天页面
     1 : new Contacts(), //好友页面
     2 : new Personal(),//我的页面
+    3 : new TestPage(),//我的页面
   });
 
   //好友页面
@@ -30,23 +32,15 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('即时通讯'),
-        actions: <Widget>[
-          GestureDetector(
-            onTap: (){
-              print('onTap');
-            },
-            child: Icon(Icons.search),
-          )
-        ],
-      ),
+
       bottomNavigationBar: new BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         items: [
           new BottomNavigationBarItem(icon: Icon(Icons.chat), label: '聊天'),
           new BottomNavigationBarItem(icon: Icon(Icons.person_search), label: '好友'),
           new BottomNavigationBarItem(icon: Icon(Icons.person), label: '我的'),
+          new BottomNavigationBarItem(icon: Icon(Icons.ten_k), label: '测试'),
         ],
         onTap: (index){
           print('${index}');
