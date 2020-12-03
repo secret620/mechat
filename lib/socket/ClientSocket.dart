@@ -1,23 +1,26 @@
-
-
 import 'dart:async';
 import 'dart:io';
-
 import 'package:mechat/common/Console.dart';
+import 'package:provide/provide.dart';
+import 'SocketProvider.dart';
 
-class ClickSocket {
+class ClientSocket {
 
-  bool clickSocketStatus = false;
-  Timer reconnectTimer;
-  Socket clientScoket ;
+  bool _clientSocketStatus = false;
+  Timer _reconnectTimer;
+  Socket _clientSocket ;
+  var _context;
 
-   void connect() async {
-    if(!clickSocketStatus){
-      await Socket.connect('127.0.0.1', 8080).then((socket){
+   void connect(context) async {
+    if(!_clientSocketStatus){
+      await Socket.connect('127.0.0.1', 36362).then((socket){
         Console.info('连接成功-$socket');
 
-        this.clientScoket = socket;
-        this.clickSocketStatus = true;
+        this._clientSocket = socket;
+        this._clientSocketStatus = true;
+
+        // 存储全局socket对象
+        Provide.value<SocketProvider>(context).setSocket(_clientSocket);
 
         //listen(void onData(T event)?,
         //{Function? onError, void onDone()?, bool? cancelOnError});
@@ -48,10 +51,10 @@ class ClickSocket {
 
   // Socket出现断开的问题
   void doneHandler(){
-    this.clickSocketStatus = false;
-    Console.info('原先socket=${clientScoket}');
-    clientScoket.close();
-    clientScoket.destroy();
+    this._clientSocketStatus = false;
+    Console.info('原先socket=${_clientSocket}');
+    _clientSocket.close();
+    _clientSocket.destroy();
     reconnectSocket();          //调用重连socket方法
   }
   // 重新连接socket
@@ -59,12 +62,12 @@ class ClickSocket {
     int count = 0;
     const period = const Duration(seconds: 1);
     // 定时器
-    reconnectTimer = Timer.periodic(period, (timer) {
+    _reconnectTimer = Timer.periodic(period, (timer) {
       // 每一次重连之前，都删除关掉上一个socket
       count++;
-      if(!this.clickSocketStatus && count >= 3){
+      if(!this._clientSocketStatus && count >= 3){
         Console.info('准备开启重新链接');
-        this.connect();
+        this.connect(_context);
         count = 0;                // 倒计时设置为0
         Console.info('倒计时设置为0');
         timer.cancel();           // 关闭倒计时
@@ -78,6 +81,6 @@ class ClickSocket {
 }
 
 void main(){
-  ClickSocket clickSocket = new ClickSocket();
-  clickSocket.connect();
+  ClientSocket clickSocket = new ClientSocket();
+  // clickSocket.connect();
 }
