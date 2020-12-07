@@ -49,25 +49,8 @@ class _MyAppState extends State<MyApp>{
 
   @override
   void initState() {
-    // new ClientSocket().connect(context);
+    new ClientSocket().connect(context);
 
-    Socket.connect('127.0.0.1', 21212, sourceAddress: '127.0.0.1').then((value){
-      value.listen((event) {
-          Console.info('event');
-        },onDone: (){
-          Console.info('onDone');
-        },
-        onError: (e){
-          Console.info('onError-$e');
-        },
-        cancelOnError: true);
-    }).timeout(Duration(seconds: 5),onTimeout: (){
-      Console.info('timeout');
-    }).catchError((e) {
-      Console.info('socket无法连接: $e');
-    }).whenComplete((){
-      Console.info('complete');
-    });
     /*Socket.connect('127.0.0.1', 21212).then((socket){
       socket.listen((event) {
         Console.info('onDone');

@@ -13,17 +13,22 @@ class ClientSocket {
 
    void connect(context) async {
     if(!_clientSocketStatus){
-      await Socket.connect('127.0.0.1', 36362).then((socket){
+      await Socket.connect('192.168.43.164', 8000).then((socket){
         Console.info('连接成功-$socket');
 
         this._clientSocket = socket;
         this._clientSocketStatus = true;
 
-        // 存储全局socket对象
-        Provide.value<SocketProvider>(context).setSocket(_clientSocket);
+        SocketProvider socketProvider = new SocketProvider();
+        socketProvider.setSocket(this._clientSocket);
+        socketProvider.setNetWorkState('4G', context);
 
-        //listen(void onData(T event)?,
-        //{Function? onError, void onDone()?, bool? cancelOnError});
+        var providers = Providers();
+        providers.provide(Provider<SocketProvider>.value(socketProvider));
+
+        // 存储全局socket对象
+        final currentCounter = Provide.value<SocketProvider>(context);
+
         socket.listen(
             dataHandler,
             onDone: (){
@@ -35,6 +40,10 @@ class ClientSocket {
             },
             cancelOnError: true
         );
+      }).timeout(Duration(seconds: 5),onTimeout: (){
+        Console.info('timeout');
+      }).whenComplete((){
+        Console.info('complete');
       }).catchError((e) {
         Console.info('socket无法连接: $e');
       });

@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+
 import 'ClientSocket.dart';
 
-class SocketProvider{
+class SocketProvider with ChangeNotifier{
   Socket socket;
   String netWorkStatus = 'none';              // 网络状态
 
