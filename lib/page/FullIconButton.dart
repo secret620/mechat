@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class FullIconButton extends MaterialButton with MaterialButtonWithIconMixin {
@@ -8,7 +6,7 @@ class FullIconButton extends MaterialButton with MaterialButtonWithIconMixin {
     @required VoidCallback onPressed,
     ValueChanged<bool> onHighlightChanged,
     ButtonTextTheme textTheme,
-    Color textColor,
+    Color textColor:Colors.black,
     Color disabledTextColor,
     Color color,
     Color disabledColor,
@@ -33,64 +31,69 @@ class FullIconButton extends MaterialButton with MaterialButtonWithIconMixin {
     Widget bottomIcon,
     EdgeInsetsGeometry textPadding,
     Widget label,
+    MainAxisAlignment alignment : MainAxisAlignment.spaceBetween,
   })  : assert(elevation == null || elevation >= 0.0),
         assert(highlightElevation == null || highlightElevation >= 0.0),
         assert(disabledElevation == null || disabledElevation >= 0.0),
         super(
-        key: key,
-        onPressed: onPressed,
-        onHighlightChanged: onHighlightChanged,
-        textTheme: textTheme,
-        textColor: textColor,
-        disabledTextColor: disabledTextColor,
-        color: color,
-        disabledColor: disabledColor,
-        focusColor: focusColor,
-        hoverColor: hoverColor,
-        highlightColor: highlightColor,
-        splashColor: splashColor,
-        colorBrightness: colorBrightness,
-        elevation: elevation,
-        highlightElevation: highlightElevation,
-        disabledElevation: disabledElevation,
-        shape: shape,
-        clipBehavior: clipBehavior,
-        focusNode: focusNode,
-        materialTapTargetSize: materialTapTargetSize,
-        animationDuration: animationDuration,
-        minWidth: minWidth,
-        height: height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Offstage(
-              offstage: topIcon == null,
-              child: topIcon,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Offstage(
-                  offstage: leftIcon == null,
-                  child: leftIcon,
-                ),
-                Padding(
-                  padding: textPadding,
-                  child: label,
-                ),
-                Offstage(
-                  offstage: rightIcon == null,
-                  child: rightIcon,
-                ),
-              ],
-            ),
-            Offstage(
-              offstage: bottomIcon == null,
-              child: bottomIcon,
-            ),
-          ],
-        ),
-      );
+          key: key,
+          onPressed: onPressed,
+          onHighlightChanged: onHighlightChanged,
+          textTheme: textTheme,
+          textColor: textColor,
+          disabledTextColor: disabledTextColor,
+          color: color,
+          disabledColor: disabledColor,
+          focusColor: focusColor,
+          hoverColor: hoverColor,
+          highlightColor: highlightColor,
+          splashColor: splashColor,
+          colorBrightness: colorBrightness,
+          elevation: elevation,
+          highlightElevation: highlightElevation,
+          disabledElevation: disabledElevation,
+          shape: shape,
+          clipBehavior: clipBehavior,
+          focusNode: focusNode,
+          materialTapTargetSize: materialTapTargetSize,
+          animationDuration: animationDuration,
+          minWidth: minWidth,
+          height: height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Offstage(
+                offstage: topIcon == null,
+                child: topIcon,
+              ),
+              Row(
+                mainAxisAlignment: alignment,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Offstage(
+                        offstage: leftIcon == null,
+                        child: leftIcon,
+                      ),
+                      Padding(
+                        padding: textPadding,
+                        child: label,
+                      ),
+                      Offstage(
+                        offstage: rightIcon == null,
+                        child: rightIcon,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Offstage(
+                offstage: bottomIcon == null,
+                child: bottomIcon,
+              ),
+            ],
+          ),
+        );
 }

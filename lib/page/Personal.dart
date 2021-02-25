@@ -95,15 +95,16 @@ class _PersonalState extends State<Personal> {
             ),
 
             FullIconButton(
-              label: Text("GitHub登录"),
-              color: Colors.blue,
+              label: Text("GitHub登录2",),
+              height: 55.0,
+              color: Colors.white,
               textColor: Colors.white,
               onPressed: () {},
               minWidth: double.infinity,
               leftIcon: Icon(Icons.volume_up),
-              rightIcon: Icon(Icons.group),
-              topIcon: Text("我是👆"),
-              bottomIcon: Text("我是👇"),
+              // rightIcon: Icon(Icons.group),
+              // topIcon: Text("我是👆"),
+              // bottomIcon: Text("我是👇"),
               textPadding: EdgeInsets.only(left: 10, right: 10),
             )
           ],
