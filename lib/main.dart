@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mechat/socket/ClientSocket.dart';
@@ -49,6 +50,10 @@ class _MyAppState extends State<MyApp>{
 
   @override
   void initState() {
+
+    //初始化设置 LogUtil
+    LogUtil.init(isDebug: true);
+
     new ClientSocket().connect(context);
 
     /*Socket.connect('127.0.0.1', 21212).then((socket){

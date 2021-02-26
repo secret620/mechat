@@ -17,7 +17,7 @@ class _AppState extends State<App> {
   int _currentIndex = 0;
   Map<int, Widget> pages = Map.from({
     0 : new MessagePage(),//聊天页面
-    1 : new Contacts(), //好友页面
+    1 : new Contacts(), //联系人页面
     2 : new Personal(),//我的页面
     3 : new TestPage(),//我的页面
   });
@@ -38,7 +38,7 @@ class _AppState extends State<App> {
         currentIndex: _currentIndex,
         items: [
           new BottomNavigationBarItem(icon: Icon(Icons.chat), label: '聊天'),
-          new BottomNavigationBarItem(icon: Icon(Icons.person_search), label: '好友'),
+          new BottomNavigationBarItem(icon: Icon(Icons.person_search), label: '联系人'),
           new BottomNavigationBarItem(icon: Icon(Icons.person), label: '我的'),
           new BottomNavigationBarItem(icon: Icon(Icons.ten_k), label: '测试'),
         ],

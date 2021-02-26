@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/services.dart';
 
-import 'FullIconButton.dart';
+import '../common/IconButton.dart';
 
 class Personal extends StatefulWidget {
   Personal({Key key}) : super(key: key);
@@ -35,122 +35,68 @@ class _PersonalState extends State<Personal> {
                 ],
               ),
             ),
-            this.createNev('支付', Icons.payments, Colors.green, top: 10.0, bottom: 10.0),
-            this.createNev('收藏', Icons.check_box_outline_blank, Colors.orangeAccent ),
-            this.createNev('朋友圈', Icons.map_outlined, Colors.blue ),
-            this.createNev('卡包', Icons.credit_card_rounded, Colors.blue ),
-            this.createNev('表情', Icons.tag_faces, Colors.amber ),
-            this.createNev('设置', Icons.settings, Colors.blue, top: 10.0, bottom: 10.0),
-            
-            Container(
-              height: 100.0,
-              decoration: new BoxDecoration(
-                border: new Border(
-                  bottom: BorderSide(
-                    width: 0.0,//宽度
-                    color: Colors.grey[300], //边框颜色
-                  ),
-                ),
-                color: Colors.white,
-              ),
-              child: MaterialButton(
-                ///按钮的背景
-                color: Colors.blue,
-                minWidth: double.infinity,
-                height: double.infinity,
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    color: Colors.white,
-                    icon: Icon(Icons.volume_up),
-                    onPressed: null,
-                  ),
-                ),
-                onPressed: (){
-                  print('xx');
-                },
-              ),
-            ),
+            // this.createNev('支付', Icons.payments, Colors.green, top: 10.0, bottom: 10.0),
+            // this.createNev('收藏', Icons.check_box_outline_blank, Colors.orangeAccent ),
+            // this.createNev('朋友圈', Icons.map_outlined, Colors.blue ),
+            // this.createNev('卡包', Icons.credit_card_rounded, Colors.blue ),
+            // this.createNev('表情', Icons.tag_faces, Colors.amber ),
+            // this.createNev('设置', Icons.settings, Colors.blue, top: 10.0, bottom: 10.0),
 
-            TextButton.icon(
-              onPressed: (){
-                print('xxx');
-              },
-              icon: Icon(Icons.volume_up),
-              label: new Text('data'),
-              style: ButtonStyle(
-                //设置按钮的大小
-                minimumSize: MaterialStateProperty.all(Size(double.infinity, 100)),
-                //设置按钮内边距
-                padding: MaterialStateProperty.all(EdgeInsets.all(10)),
-                backgroundColor: MaterialStateProperty.resolveWith((states) {
-                  //设置按下时的背景颜色
-                  if (states.contains(MaterialState.pressed)) {
-                    return Colors.blue[200];
-                  }
-                  //默认不使用背景颜色
-                  return null;
-                }),
-              ),
-            ),
-
-            FullIconButton(
-              label: Text("GitHub登录2",),
-              height: 55.0,
-              color: Colors.white,
-              textColor: Colors.white,
-              onPressed: () {},
-              minWidth: double.infinity,
-              leftIcon: Icon(Icons.volume_up),
-              // rightIcon: Icon(Icons.group),
-              // topIcon: Text("我是👆"),
-              // bottomIcon: Text("我是👇"),
-              textPadding: EdgeInsets.only(left: 10, right: 10),
-            )
+            this.createNavButton('支付', Icons.payments, Colors.green, (){
+              print('支付');
+            }, top: 10.0, bottom: 10.0),
+            this.createNavButton('收藏', Icons.check_box_outline_blank, Colors.orangeAccent, (){
+              print('收藏');
+            }, ),
+            this.createNavButton('朋友圈', Icons.map_outlined, Colors.blue, (){
+              print('朋友圈');
+            }, ),
+            this.createNavButton('卡包', Icons.credit_card_rounded, Colors.blue, (){
+              print('卡包');
+            }, ),
+            this.createNavButton('表情', Icons.tag_faces, Colors.amber, (){
+              print('表情');
+            }, ),
+            this.createNavButton('设置', Icons.settings, Colors.blue, (){
+              print('设置');
+            }, top: 10.0, bottom: 10.0),
           ],
         ),
       ),
     );
   }
 
-  Widget createNev(String name, IconData iconData, Color color, {double top:0.0, double bottom:0.0}){
-    print(top);
-    print(top == 0);
+  Widget createNavButton(String label, IconData iconData, Color iconColor, VoidCallback callback, {double top:0.0, double bottom:0.0, double right:0.0, double left:0.0}){
     return new Container(
       decoration: new BoxDecoration(
         border: ( top != 0 ? null : new Border(
-            bottom: BorderSide(
-              width: 0.0,//宽度
-              color: Colors.grey[300], //边框颜色
-            ),
-          )
+          bottom: BorderSide(
+            width: 1.0,//宽度
+            color: Colors.grey[50], //边框颜色
+          ),
+        )
         ),
-        color: Colors.white,
+        // color: Colors.grey,
       ),
       margin: EdgeInsets.only(top: top, bottom: bottom),
-      padding: EdgeInsets.only(left: 5.0, right: 5.0),
       height: 55.0,
       width: double.infinity,
-      child: new Row(
-        children: [
-          this.nev(name, iconData, color),
-        ],
+      child: new FullIconButton(
+        label: Text(label,style: TextStyle(fontSize: 17.0,fontWeight: FontWeight.w400),),
+        height: 55.0,
+        color: Colors.white,
+        highlightElevation: 0.0,//阴影
+        disabledElevation: 0.0,//阴影
+        elevation: 0.0,//阴影
+        onPressed: callback,
+        minWidth: double.infinity,
+        leftIcon: Icon(iconData, color: iconColor,),
+        textPadding: EdgeInsets.only(left: 10, right: 10),
+        topMargin: top,
+        rightMargin: right,
+        leftMargin: left,
+        bottomMargin: bottom,
       ),
-    );
-  }
-
-  Widget nev(String name, IconData iconData, Color color){
-    return new Row(
-      children: [
-        Icon(
-          iconData,
-          color: color,
-        ),
-        new Container(
-          margin: const EdgeInsets.only(left: 3.0),
-          child: Text(name, style: new TextStyle(fontSize: 17.0,),),
-        )
-      ],
     );
   }
 
