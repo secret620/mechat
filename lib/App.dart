@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mechat/page/contants/ContactsPage.dart';
+import 'package:mechat/page/contants/PageScaffold.dart';
+import 'package:mechat/page/contants/contacts_list_page.dart';
 
 import 'page/Contacts.dart';
 import 'page/MessagePage.dart';
@@ -17,7 +20,9 @@ class _AppState extends State<App> {
   int _currentIndex = 0;
   Map<int, Widget> pages = Map.from({
     0 : new MessagePage(),//聊天页面
-    1 : new Contacts(), //联系人页面
+    // 1 : new Contacts(), //联系人页面
+    1 : new ContactsPage(showAppBar: true,showAzAll: true,), //联系人页面
+    // 1 : new ContactListPage(showAppBar: true,), //联系人页面
     2 : new Personal(),//我的页面
     3 : new TestPage(),//我的页面
   });

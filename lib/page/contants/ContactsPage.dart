@@ -4,8 +4,8 @@ import 'index.dart';
 
 class ContactsPage extends StatefulWidget {
   bool showAppBar;
-
-  ContactsPage( {this.showAppBar : true} );
+  bool showAzAll;
+  ContactsPage( {this.showAppBar : true, this.showAzAll : false} );
 
   @override
   _ContactsPageState createState( ) {
@@ -19,6 +19,8 @@ class _ContactsPageState extends State<ContactsPage> {
   List<ContactInfo> contactList = [];
   //固定头部数据
   List<ContactInfo> topList = [];
+  List<String> azDyn = [];
+  Set<String> azSetDyn = {};
 
   @override
   void initState() {
@@ -44,6 +46,9 @@ class _ContactsPageState extends State<ContactsPage> {
         bgColor: Colors.blueAccent,
         iconData: Icons.person));
     loadData();
+    if(widget.showAzAll){
+      this.azDyn = kIndexBarData;
+    }
   }
 
   /*
@@ -52,7 +57,8 @@ class _ContactsPageState extends State<ContactsPage> {
    */
   void loadData() async {
     //加载联系人列表
-    rootBundle.loadString('assets/data/car_models.json').then((value) {
+    // rootBundle.loadString('assets/data/car_models.json').then((value) {
+    rootBundle.loadString('assets/data/contacts.json').then((value) {
       print('加载联系人列表${value}');
       List list = json.decode(value);
       list.forEach((v) {
@@ -79,6 +85,8 @@ class _ContactsPageState extends State<ContactsPage> {
 
       String tag = pinyin.substring(0, 1).toUpperCase();
 
+      azSetDyn.add(tag);
+
       LogUtil.v(': ${contactInfo.name}/${pinyin}/${tag}');
 
       LogUtil.v(': 正则校验转换后的首字母是否A-Z');
@@ -88,6 +96,10 @@ class _ContactsPageState extends State<ContactsPage> {
         list[i].tagIndex = "#";
       }
     }
+    if(!widget.showAzAll){
+      this.azDyn = azSetDyn.toList();
+    }
+
     LogUtil.v(': A-Z sort 排序前 ${list.asMap()}');
     // A-Z sort.
     SuspensionUtil.sortListBySuspensionTag(contactList);
@@ -104,61 +116,69 @@ class _ContactsPageState extends State<ContactsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: widget.showAppBar ? AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Color(0xFFEDEDED),
-        title: Text(
-          'Contants',
-          style: TextStyle(color: Color(0xFF171717)),
+    return new Theme(
+        data: new ThemeData(
+          brightness: Brightness.light,
         ),
-      ):null,
-      body: AzListView(
-        data: contactList,// 数据
-        itemCount: contactList.length, // 长度
-        itemBuilder: (BuildContext context, int index) { //构建列表
-          ContactInfo model = contactList[index];
-          return Utils.getWeChatListItem(
-            context,
-            model,
-            defHeaderBgColor: Color(0xFFE5E5E5),
-          );
-        },
-        /*
+        child: Scaffold(
+          appBar: widget.showAppBar ? AppBar(
+            brightness: Brightness.light,
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            // backgroundColor: Color(0xFFEDEDED),
+            title: Text(
+              '联系人',
+              style: TextStyle(color: Color(0xFF171717)),
+            ),
+          ) : null,
+          body: AzListView(
+            data: contactList,// 数据
+            itemCount: contactList.length, // 长度
+            itemBuilder: (BuildContext context, int index) { //构建列表
+              ContactInfo model = contactList[index];
+              return Utils.getWeChatListItem(
+                context,
+                model,
+                defHeaderBgColor: Color(0xFFE5E5E5),
+              );
+            },
+            /*
         ScrollPhysics的作用是 确定可滚动控件的物理特性， 常见的有以下四大金刚：
           BouncingScrollPhysics ：允许滚动超出边界，但之后内容会反弹回来。
           ClampingScrollPhysics ： 防止滚动超出边界，夹住 。
           AlwaysScrollableScrollPhysics ：始终响应用户的滚动。
           NeverScrollableScrollPhysics ：不响应用户的滚动。
          */
-        physics: BouncingScrollPhysics(),
-        susItemBuilder: (BuildContext context, int index) {
-          ContactInfo model = contactList[index];
-          if ('↑' == model.getSuspensionTag()) {
-            return Container();
-          }
-          return Utils.getSusItem(context, model.getSuspensionTag());// 列表分区 A-Z widget
-        },
-        indexBarData: ['↑', '☆', ...kIndexBarData],
-        indexBarOptions: IndexBarOptions(
-          needRebuild: true,
-          ignoreDragCancel: true,
-          downTextStyle: TextStyle(fontSize: 12, color: Colors.white),
-          downItemDecoration:
-          BoxDecoration(shape: BoxShape.circle, color: Colors.green),
-          indexHintWidth: 120 / 2,
-          indexHintHeight: 100 / 2,
-          indexHintDecoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(Utils.getImgPath('ic_index_bar_bubble_gray')),
-              fit: BoxFit.contain,
+            physics: BouncingScrollPhysics(),
+            susItemBuilder: (BuildContext context, int index) {
+              ContactInfo model = contactList[index];
+              if ('↑' == model.getSuspensionTag()) {
+                return Container();
+              }
+              return Utils.getSusItem(context, model.getSuspensionTag());// 列表分区 A-Z widget
+            },
+            // indexBarData: ['↑', '☆', ...kIndexBarData],
+            indexBarData: ['↑', '☆', ...azDyn, '#' ],
+            indexBarOptions: IndexBarOptions(
+              needRebuild: true,
+              ignoreDragCancel: true,
+              downTextStyle: TextStyle(fontSize: 12, color: Colors.white),
+              downItemDecoration:
+              BoxDecoration(shape: BoxShape.circle, color: Colors.green),
+              indexHintWidth: 120 / 2,
+              indexHintHeight: 100 / 2,
+              indexHintDecoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(Utils.getImgPath('ic_index_bar_bubble_gray')),
+                  fit: BoxFit.contain,
+                ),
+              ),
+              indexHintAlignment: Alignment.centerRight,
+              indexHintChildAlignment: Alignment(-0.25, 0.0),
+              indexHintOffset: Offset(-20, 0),
             ),
           ),
-          indexHintAlignment: Alignment.centerRight,
-          indexHintChildAlignment: Alignment(-0.25, 0.0),
-          indexHintOffset: Offset(-20, 0),
-        ),
-      ),
+        )
     );
   }
 }

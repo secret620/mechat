@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/services.dart';
-
 import '../common/IconButton.dart';
 
 class Personal extends StatefulWidget {
