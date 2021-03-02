@@ -1,5 +1,6 @@
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:mechat/common/IconButton.dart';
 import 'package:mechat/page/LXScrollPhotosView.dart';
 import 'package:mechat/page/contants/index.dart';
 
@@ -139,19 +140,31 @@ class _AppCenterState extends State<AppCenter> {
               color: Color.fromRGBO(51,149,250, 1),
               borderRadius: new BorderRadius.only(topLeft: Radius.circular(10.0),topRight: Radius.circular(10.0),),
             ),
-            child: Text('热门应用', style: TextStyle(fontSize: 18.0),),
+            child: Row(
+              mainAxisAlignment : MainAxisAlignment.start,
+              mainAxisSize : MainAxisSize.max,
+              children: [
+                Icon(Icons.wb_sunny_outlined, color: Colors.white,size: 15,),
+                Text('热门应用', style: TextStyle(fontSize: 18.0, color: Colors.white),)
+              ],
+            ),
           ),
           Container(
-            color: Colors.yellow,
-            child:   buildGridView1(),
-          )
+            padding: EdgeInsets.only(top:10.0),
+            child:  InkWell(
+              child: buildGridView1(),
+              onTap:(){
+                print('CALL');
+                },
+              ),
+          ) ,
         ],
       ),
     );
     return c;
   }
 
-  Widget gets(){
+  /*Widget gets(){
     List<Container> _buildGuidTitleList(int count) {
       return List<Container>.generate(
         count,(int index) => Container(
@@ -268,7 +281,7 @@ class _AppCenterState extends State<AppCenter> {
         ),
       ),
     );
-  }
+  }*/
 
   ///通过构造函数来创建
   Widget buildGridView1() {
@@ -290,7 +303,6 @@ class _AppCenterState extends State<AppCenter> {
     );
   }
 
-
   List<Widget> buildListViewItemList(){
     List<Widget> list = [];
     ///模拟的8条数据
@@ -305,10 +317,37 @@ class _AppCenterState extends State<AppCenter> {
     return new Container(
       ///内容剧中
       alignment: Alignment.center,
-
       ///根据角标来动态计算生成不同的背景颜色
-      color: Colors.cyan[100 * (index % 9)],
-      child: new Text('grid item $index'),
+      // color: Colors.cyan[100 * (index % 9)],
+      child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: new Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              new Container(
+                padding : EdgeInsets.all(10.0),
+                decoration: new BoxDecoration(
+                  color: Color.fromRGBO(51,149,250, 1),
+                  borderRadius: new BorderRadius.circular((7.0)),
+                ),
+                child: new Icon(Icons.table_chart, color: Colors.white,size: 30,),
+              ),
+              new Container(
+                // margin: const EdgeInsets.only(top: .0),
+                child: new Text(
+                  '我的接单',
+                  style: new TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromRGBO(164,165,166, 1),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
     );
   }
 }
