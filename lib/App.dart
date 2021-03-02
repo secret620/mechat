@@ -21,7 +21,7 @@ class _AppState extends State<App> {
   Map<int, Widget> pages = Map.from({
     0 : new MessagePage(),//聊天页面
     // 1 : new Contacts(), //联系人页面
-    1 : new ContactsPage(showAppBar: true,showAzAll: true,), //联系人页面
+    1 : new ContactsPage(showAppBar: true,showAzAll: false,), //联系人页面
     // 1 : new ContactListPage(showAppBar: true,), //联系人页面
     2 : new Personal(),//我的页面
     3 : new TestPage(),//我的页面

@@ -8,6 +8,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.5.0-nullsafety.1"
+  azlistview:
+    dependency: "direct main"
+    description:
+      name: azlistview
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -43,6 +50,27 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.15.0-nullsafety.3"
+  common_utils:
+    dependency: "direct main"
+    description:
+      name: common_utils
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.4"
+  convert:
+    dependency: transitive
+    description:
+      name: convert
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.1"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.5"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -57,6 +85,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.9"
+  decimal:
+    dependency: transitive
+    description:
+      name: decimal
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.5"
   fake_async:
     dependency: transitive
     description:
@@ -74,6 +109,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  github_language_colors:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: bf0da7bc7a1eb5acb7515dd71898a12cf54a4376
+      url: "git://github.com/Sky24n/github_language_colors.git"
+    source: git
+    version: "0.0.1"
+  lpinyin:
+    dependency: "direct main"
+    description:
+      name: lpinyin
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
   matcher:
     dependency: transitive
     description:
@@ -102,6 +153,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.2"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.8"
+  scrollable_positioned_list:
+    dependency: transitive
+    description:
+      name: scrollable_positioned_list
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.9"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -165,3 +230,4 @@ packages:
     version: "2.1.0-nullsafety.3"
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
+  flutter: ">=1.12.13+hotfix.5 <2.0.0"
