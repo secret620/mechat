@@ -1,6 +1,10 @@
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:mechat/common/GridViewMenu.dart';
+import 'package:mechat/common/GridViewPanelModel.dart';
 import 'package:mechat/common/IconButton.dart';
+import 'package:mechat/common/IconText.dart';
+import 'package:mechat/common/PanelGridViewMenu.dart';
 import 'package:mechat/page/LXScrollPhotosView.dart';
 import 'package:mechat/page/contants/index.dart';
 
@@ -39,67 +43,6 @@ class AppCenter extends StatefulWidget {
 class _AppCenterState extends State<AppCenter> {
   @override
   Widget build(BuildContext context) {
-    // return Center(
-    //   child: Container(
-    //     child: Container(
-    //       padding: EdgeInsets.all(10.0),
-    //       margin: EdgeInsets.all(10.0),
-    //       decoration: new BoxDecoration(
-    //         color: Color(0xFF9E9E9E),
-    //         borderRadius: new BorderRadius.circular((7.0)),
-    //       ),
-    //       height: 250.0,
-    //       child: GridView.builder(
-    //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    //           crossAxisCount: this.widget.currentCrossAxisCount,
-    //           crossAxisSpacing: this.widget.crossAxisPaddingSize,
-    //           mainAxisSpacing: this.widget.mainAxisPaddingSize,
-    //         ),
-    //         itemBuilder: (BuildContext context, int index){
-    //           return GestureDetector(
-    //             child: Hero(
-    //               // tag: widget.list[index].imgUrl,
-    //               tag: index,
-    //               child: Container(
-    //                 width: 20.0,
-    //                 height: 20.0,
-    //                 // color: widget.bgColor,
-    //                 color: Colors.orangeAccent,
-    //                 child: Container(
-    //                   color: Colors.red,
-    //                 ),
-    //                 // child: ClipRRect(
-    //                 //   borderRadius: BorderRadius.circular(widget.radiusSize),
-    //                 //   // child: Image(
-    //                 //   //   width: 10.0,
-    //                 //   //   height: 10.0,
-    //                 //   //   image: NetworkImage(widget.list[index].imgUrl),
-    //                 //   //   fit: BoxFit.fitWidth,
-    //                 //   // ),
-    //                 //
-    //                 // ),
-    //               ),
-    //             ),
-    //             onTap: () {
-    //               Navigator.of(context).push(PageRouteBuilder(
-    //                   pageBuilder: (context,animation, secondaryAnimation) {
-    //                     return FadeTransition(
-    //                         opacity: animation,
-    //                         child: LXScrollPhotosView(currentIndex: index,currentList: widget.list,)
-    //                     );
-    //                   }
-    //               )
-    //               );
-    //             } ,
-    //           );
-    //         },
-    //         itemCount: widget.list.length,
-    //       ),
-    //     )
-    //   ),
-    // );
-    // return this.getBBWidget(context);
-    // return this.gets();
     return Scaffold(
       backgroundColor: Color.fromRGBO(242,241,246, 1),
       appBar: AppBar(
@@ -113,241 +56,61 @@ class _AppCenterState extends State<AppCenter> {
         ),
       ),
       // body: this.gets(),
-      body: this.hot(),
-    );
-  }
-
-  Widget hot(){
-    Widget c =  Container(
-      width: double.infinity,
-      height: 300,
-      margin: EdgeInsets.all(10.0),
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        borderRadius: new BorderRadius.all(Radius.circular(10.0),),
-      ),
-      child: Column(
-        crossAxisAlignment : CrossAxisAlignment.start,
-        mainAxisAlignment : MainAxisAlignment.start,
-        mainAxisSize : MainAxisSize.max,
-        children: [
-          Container(
-            padding: EdgeInsets.only(left: 10.0),
-            alignment: Alignment.centerLeft,
-            width: double.infinity,
-            height: 40,
-            decoration: new BoxDecoration(
-              color: Color.fromRGBO(51,149,250, 1),
-              borderRadius: new BorderRadius.only(topLeft: Radius.circular(10.0),topRight: Radius.circular(10.0),),
-            ),
-            child: Row(
-              mainAxisAlignment : MainAxisAlignment.start,
-              mainAxisSize : MainAxisSize.max,
-              children: [
-                Icon(Icons.wb_sunny_outlined, color: Colors.white,size: 15,),
-                Text('热门应用', style: TextStyle(fontSize: 18.0, color: Colors.white),)
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            PanelGridViewMenu(
+              header : GridViewPanelModel(
+                panelTitle: '热门应用',
+                panelTitleTextStyle: TextStyle(color: Colors.white),
+                panelTitleIcon: Icon(Icons.whatshot_sharp, color: Colors.white,),
+              ),
+              data: <GridViewMenu> [
+                new GridViewMenu('读取短信', iconData: Icons.message,click: (){LogUtil.v('读取短信');}),
+                new GridViewMenu('读取通讯录', icon : Icon(Icons.contact_phone,),iconContainerBackgroundColor: Color.fromRGBO(255,148,60, 1)),
+                new GridViewMenu('扫描二维码', icon : Icon( IconData(0xe819, fontFamily: 'alibabaicon'),),iconContainerBackgroundColor: Color.fromRGBO(254,172,0, 1)),
+                new GridViewMenu('支付宝支付', icon : Icon( IconData(0xe934, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('微信支付', icon : Icon( IconData(0xe958, fontFamily: 'alibabaicon'),),iconContainerBackgroundColor: Color.fromRGBO(6,192,95, 1)),
               ],
             ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top:10.0),
-            child:  InkWell(
-              child: buildGridView1(),
-              onTap:(){
-                print('CALL');
-                },
-              ),
-          ) ,
-        ],
-      ),
-    );
-    return c;
-  }
 
-  /*Widget gets(){
-    List<Container> _buildGuidTitleList(int count) {
-      return List<Container>.generate(
-        count,(int index) => Container(
-          // child: Image.network('https://inews.gtimg.com/newsapp_bt/0/12853014573/1000'),
-          child: Center(
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              // color: Colors.red,
-              child: Container(
-                decoration: new BoxDecoration(
-                  color: Color.fromRGBO(51,149,250, 1),
-                  borderRadius: new BorderRadius.circular((7.0)),
-                ),
-                child: Center(
-                  child: IconButton(icon: Icon(Icons.table_chart,color: Colors.white,), iconSize : 35.0, onPressed: (){
-                    LogUtil.v('点击');
-                  }),
-                ),
+            PanelGridViewMenu(
+              autoHeight: true,
+              header : GridViewPanelModel(
+                panelTitle: '组件',
+                panelTitleTextStyle: TextStyle(color: Colors.white),
+                panelTitleIcon: Icon(Icons.whatshot_sharp, color: Colors.white,),
               ),
-            ),
-          ),
-        ),
-      );
-    }
-
-    return Container(
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.all(10.0),//EdgeInsets.only(top: 0.0, left: 10.0, bottom: 10.0,right: 10.0),
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        borderRadius: new BorderRadius.circular((7.0)),
-      ),
-      height: 230.0,
-      child: Column(
-        mainAxisAlignment : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: GridView.extent(
-              shrinkWrap: true,
-              //次轴的宽度
-              maxCrossAxisExtent: 100,
-              //次轴的宽度
-              padding: EdgeInsets.all(1.0),
-              //上下左右的内边距
-              mainAxisSpacing: 5.0,
-              //主轴元素间距
-              crossAxisSpacing: 5.0,
-              //次轴元素间距
-              children: _buildGuidTitleList(8), //添加
-            ),
-            flex: 1,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget getBBWidget(BuildContext context) {
-    var ScreenW = MediaQuery.of(context).size.width;
-    return Center(
-      child: Container(
-        margin: EdgeInsets.all(8),
-        padding: EdgeInsets.all(10.0),
-        height: 200,
-        width: ScreenW,
-        decoration: new BoxDecoration(
-          color: Colors.white,
-          borderRadius: new BorderRadius.circular((7.0)),
-        ),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(6.0),
-                decoration: new BoxDecoration(
-                  color: Color.fromRGBO(51,149,250, 1),
-                  borderRadius: new BorderRadius.circular((7.0)),
-                ),
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 50,
-                  width: 50,
-                  child: Center(
-                    child: IconButton(icon: Icon(Icons.table_chart,color: Colors.white,), iconSize : 35.0, onPressed: (){
-                      LogUtil.v('点击');
-                    }),
-                  ),
-                ),
-              ),
-              flex: 1,
-            ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(6.0),
-                decoration: new BoxDecoration(
-                  color: Color.fromRGBO(51,149,250, 1),
-                  borderRadius: new BorderRadius.circular((7.0)),
-                ),
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 50,
-                  width: 50,
-                  child: Center(
-                    child: IconButton(icon: Icon(Icons.table_chart,color: Colors.white,), iconSize : 35.0, onPressed: (){
-                      LogUtil.v('点击');
-                    }),
-                  ),
-                ),
-              ),
-              flex: 1,
+              data: <GridViewMenu> [
+                new GridViewMenu('Web浏览', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('视频播放', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('图片预览', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('选择相册', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+              ],
             ),
           ],
         ),
       ),
     );
-  }*/
-
-  ///通过构造函数来创建
-  Widget buildGridView1() {
-    return GridView(
-      shrinkWrap: true,
-      ///子Item排列规则
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //横轴元素个数
-          crossAxisCount: 4,
-          //纵轴间距
-          mainAxisSpacing: 10.0,
-          //横轴间距
-          crossAxisSpacing: 10.0,
-          //子组件宽高长度比例
-          childAspectRatio: 1.4
-      ),
-      ///GridView中使用的子Widegt
-      children: buildListViewItemList(),
-    );
   }
 
-  List<Widget> buildListViewItemList(){
-    List<Widget> list = [];
-    ///模拟的8条数据
-    for (int i = 0; i < 12; i++) {
-      list.add(buildListViewItemWidget(i));
-    }
-    return list;
-  }
 
-  ///创建GridView使用的子布局
-  Widget buildListViewItemWidget(int index) {
-    return new Container(
-      ///内容剧中
-      alignment: Alignment.center,
-      ///根据角标来动态计算生成不同的背景颜色
-      // color: Colors.cyan[100 * (index % 9)],
-      child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          child: new Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              new Container(
-                padding : EdgeInsets.all(10.0),
-                decoration: new BoxDecoration(
-                  color: Color.fromRGBO(51,149,250, 1),
-                  borderRadius: new BorderRadius.circular((7.0)),
-                ),
-                child: new Icon(Icons.table_chart, color: Colors.white,size: 30,),
-              ),
-              new Container(
-                // margin: const EdgeInsets.only(top: .0),
-                child: new Text(
-                  '我的接单',
-                  style: new TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.w400,
-                    color: Color.fromRGBO(164,165,166, 1),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-    );
-  }
 }
