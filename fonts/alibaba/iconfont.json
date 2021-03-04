@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1704642",
+      "name": "loading",
+      "font_class": "loading",
+      "unicode": "e6f8",
+      "unicode_decimal": 59128
+    },
+    {
+      "icon_id": "13646805",
+      "name": "动画片",
+      "font_class": "donghuapian",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
       "icon_id": "4766277",
       "name": "border-verticle",
       "font_class": "border-verticle",

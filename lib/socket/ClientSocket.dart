@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:mechat/common/Console.dart';
-import 'package:provide/provide.dart';
 import 'SocketProvider.dart';
 
 class ClientSocket {
@@ -23,11 +22,11 @@ class ClientSocket {
         socketProvider.setSocket(this._clientSocket);
         socketProvider.setNetWorkState('4G', context);
 
-        var providers = Providers();
-        providers.provide(Provider<SocketProvider>.value(socketProvider));
+        // var providers = Providers();
+        // providers.provide(Provider<SocketProvider>.value(socketProvider));
 
         // 存储全局socket对象
-        final currentCounter = Provide.value<SocketProvider>(context);
+        // final currentCounter = Provide.value<SocketProvider>(context);
 
         socket.listen(
             dataHandler,

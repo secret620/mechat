@@ -4,12 +4,8 @@ import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mechat/socket/ClientSocket.dart';
-import 'package:provide/provide.dart';
-
 import 'App.dart';
 import 'Home.dart';
-import 'common/Console.dart';
-import 'socket/SocketProvider.dart';
 
 void main() {
   runApp(MyApp());
