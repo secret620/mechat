@@ -5,6 +5,9 @@ import 'package:mechat/common/GridViewPanelModel.dart';
 import 'package:mechat/common/IconButton.dart';
 import 'package:mechat/common/IconText.dart';
 import 'package:mechat/common/PanelGridViewMenu.dart';
+import 'package:mechat/component/AnimatedLogo.dart';
+import 'package:mechat/component/MobileNetWorkStatus.dart';
+import 'package:mechat/component/WebViewExample.dart';
 import 'package:mechat/page/LXScrollPhotosView.dart';
 import 'package:mechat/page/contants/index.dart';
 
@@ -83,12 +86,34 @@ class _AppCenterState extends State<AppCenter> {
                 panelTitleIcon: Icon(Icons.whatshot_sharp, color: Colors.white,),
               ),
               data: <GridViewMenu> [
-                new GridViewMenu('Web浏览', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('Web浏览', icon : Icon( IconData(0xe959, fontFamily: 'alibabaicon'),), click: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return WebViewExample();
+                  }));
+                }, labelStyle: TextStyle(color: Colors.green)),
                 new GridViewMenu('视频播放', icon : Icon( IconData(0xe8fb, fontFamily: 'alibabaicon'),)),
                 new GridViewMenu('图片预览', icon : Icon( IconData(0xe9d2, fontFamily: 'alibabaicon'),)),
                 new GridViewMenu('选择相册', icon : Icon( IconData(0xe831, fontFamily: 'alibabaicon'),)),
-                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe83c, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('手机网络类型', icon : Icon( IconData(0xe83c, fontFamily: 'alibabaicon'),), click: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Mobilenetworkstatus();
+                  }));
+                }, labelStyle: TextStyle(color: Colors.green)),
                 new GridViewMenu('手机系统', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('轮播控件', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('常用按钮', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('网格容器', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('导航栏', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('列表容器', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('侧边栏', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('确认对话框', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('Loading', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('广告弹窗', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),)),
+                new GridViewMenu('动画', icon : Icon( IconData(0xe7a3, fontFamily: 'alibabaicon'),), click: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AnimatedLogo();
+                  }));
+                }, labelStyle: TextStyle(color: Colors.green)),
               ],
             ),
           ],

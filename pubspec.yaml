@@ -3,6 +3,9 @@ description: A new Flutter application.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
+#下面这行代码防止包被意外发布到
+# pub.dev使用pub publish。这是私有包的首选。
+#删除这一行，如果你想发布到pub.dev
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
@@ -15,8 +18,18 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+#下面定义了应用程序的版本和构建号。
+#版本号是由点分隔的三个数字，例如1.2.43
+#后跟一个用+分隔的可选构建号。
+#版本和生成器号都可能在振荡中被重写
+#分别指定——build-name和——build-number。
+#在Android中，build-name被用作versionName, build-number被用作versionCode。
+#阅读更多关于Android版本控制https://developer.android.com/studio/publish/versioning
+#在iOS中，build-name在build时被用作CFBundleShortVersionString
+# app版本号
 version: 1.0.0+1
 
+#运行环境支持的dart版本号范围
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
@@ -42,6 +55,7 @@ dependencies:
   common_utils: ^1.2.4
   animator: ^2.0.2
   webview_flutter: ^2.0.1
+  connectivity: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -55,7 +69,9 @@ flutter:
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
-  # the material Icons class.
+  #下一行确保材质图标的字体是
+  #包含在您的应用程序中，以便您可以使用的图标
+  #材质图标类。
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
@@ -76,6 +92,8 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  #Supported font formats
+  #.ttf、.otf
   fonts:
     - family: alibabaicon
       fonts:

@@ -225,7 +225,7 @@ class _PanelGridViewMenuState extends State<PanelGridViewMenu>{
                   // margin: const EdgeInsets.only(top: .0),
                   child: new Text(
                     gridViewMenu.label,
-                    style: new TextStyle(
+                    style: gridViewMenu.labelStyle ??= new TextStyle(
                       fontSize: 15.0,
                       fontWeight: FontWeight.w400,
                       color: Color.fromRGBO(164,165,166, 1),

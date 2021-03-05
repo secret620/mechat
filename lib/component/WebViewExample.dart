@@ -18,8 +18,11 @@ class WebViewExampleState extends State<WebViewExample> {
 
   @override
   Widget build(BuildContext context) {
-    return WebView(
-      initialUrl: 'https://flutter.cn',
+    return Scaffold(
+      appBar: AppBar(),
+      body: WebView(
+        initialUrl: 'https://www.baidu.com',
+      ),
     );
   }
 }
